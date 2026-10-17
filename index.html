@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal portfolio of an IT student and web developer.">
+    <title>Your Name | Portfolio</title>
+
+    <style>
+        /* ===== GENERAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --background: #0b1020;
+            --card: #141c30;
+            --text: #f5f7ff;
+            --muted: #a4aec4;
+            --primary: #8b7cff;
+            --secondary: #55e0c0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* ===== NAVIGATION ===== */
+        header {
+            background: rgba(11, 16, 32, 0.96);
+            border-bottom: 1px solid #263047;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            min-height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 620px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 45px;
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .small-title {
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span,
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-outline {
+            border: 1px solid #414b65;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        /* Decorative code illustration */
+        .code-card {
+            background: var(--card);
+            border: 1px solid #303951;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 20px 60px #0004;
+            transform: rotate(2deg);
+        }
+
+        .code-header {
+            color: var(--muted);
+            border-bottom: 1px solid #303951;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .code-card pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: 14px;
+            line-height: 2;
+            color: var(--secondary);
+        }
+
+        .code-card .purple {
+            color: #b6a9ff;
+        }
+
+        /* ===== GENERAL SECTIONS ===== */
+        section {
+            scroll-margin-top: 85px;
+        }
+
+        .section {
+            padding: 85px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 42px);
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-icon {
+            background: linear-gradient(135deg, #342d65, #174a52);
+            border: 1px solid #414267;
+            border-radius: 20px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 75px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-section {
+            background: #0f1628;
+            border-top: 1px solid #202940;
+            border-bottom: 1px solid #202940;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #29334b;
+            transition: 0.3s;
+        }
+
+        .skill-card:hover,
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            font-size: 30px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .skill-card p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid #29334b;
+            border-radius: 13px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .project-image {
+            height: 175px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 55px;
+        }
+
+        .project-image.one {
+            background: linear-gradient(135deg, #4d3471, #1e4053);
+        }
+
+        .project-image.two {
+            background: linear-gradient(135deg, #164b48, #252b51);
+        }
+
+        .project-image.three {
+            background: linear-gradient(135deg, #603d4d, #282a50);
+        }
+
+        .project-content {
+            padding: 23px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 9px;
+            margin: 3px;
+            border-radius: 5px;
+            background: #28324a;
+            color: #d6dcf0;
+            font-size: 12px;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            background: linear-gradient(120deg, #191633, #102a35);
+            border-top: 1px solid #29334b;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .contact-text {
+            color: var(--muted);
+            margin-top: 15px;
+        }
+
+        .contact-card {
+            padding: 28px;
+            border-radius: 13px;
+            border: 1px solid #41415c;
+            background: #0b1020aa;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            margin-bottom: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-card a {
+            color: var(--secondary);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 25px 0;
+            border-top: 1px solid #263047;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        footer p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 850px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .code-card {
+                max-width: 500px;
+                width: 100%;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px 18px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding-top: 55px;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .about-icon {
+                min-height: 180px;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">Your<span>Name.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HOME SECTION -->
+    <main>
+        <section class="hero container" id="home">
+
+            <div>
+                <div class="small-title">Welcome to my portfolio</div>
+
+                <h1>
+                    Hello, I'm <span>Your Name</span>.<br>
+                    I build things for the web.
+                </h1>
+
+                <p>
+                    I'm an IT student and aspiring web developer.
+                    I enjoy learning new technologies and creating
+                    useful, attractive, and user-friendly websites.
+                </p>
+
+                <div class="buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        View My Projects →
+                    </a>
+
+                    <a href="#contact" class="btn btn-outline">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <div class="code-card">
+                <div class="code-header">developer.html</div>
+
+                <pre><span class="purple">&lt;developer&gt;</span>
+
+  name: "Your Name"
+
+  profession: "Web Developer"
+
+  skills: ["HTML", "CSS"]
+
+  learning: true
+
+<span class="purple">&lt;/developer&gt;</span></pre>
+            </div>
+
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="section container" id="about">
+
+            <div class="section-heading">
+                <div class="small-title">Get to know me</div>
+                <h2 class="section-title">
+                    About <span>Me</span>
+                </h2>
+            </div>
+
+            <div class="about-grid">
+
+                <div class="about-icon">
+                    YN.
+                </div>
+
+                <div class="about-text">
+                    <p>
+                        My name is Your Name. I am an IT student
+                        interested in web design, software development,
+                        and technology.
+                    </p>
+
+                    <p>
+                        I enjoy solving problems, learning new skills,
+                        and turning ideas into working websites.
+                        I am continuously improving my abilities through
+                        practice and personal projects.
+                    </p>
+
+                    <p>
+                        My goal is to become a skilled developer and
+                        create digital solutions that help people and
+                        businesses.
+                    </p>
+
+                    <a href="#contact" class="btn btn-primary">
+                        Let's Connect →
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="small-title">My abilities</div>
+                    <h2 class="section-title">
+                        My <span>Skills</span>
+                    </h2>
+                    <p class="section-description">
+                        These are some of the technologies and abilities
+                        I am developing as an IT student.
+                    </p>
+                </div>
+
+                <div class="skills-grid">
+
+                    <article class="skill-card">
+                        <div class="skill-icon">&lt;/&gt;</div>
+                        <h3>HTML</h3>
+                        <p>
+                            Creating the structure and content
+                            of web pages.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">✳</div>
+                        <h3>CSS</h3>
+                        <p>
+                            Designing layouts, colors, spacing,
+                            and responsive websites.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">⌘</div>
+                        <h3>Problem Solving</h3>
+                        <p>
+                            Analysing problems and finding
+                            practical solutions.
+                        </p>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon">↗</div>
+                        <h3>Teamwork</h3>
+                        <p>
+                            Sharing ideas, communicating,
+                            and learning with others.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="section container" id="projects">
+
+            <div class="section-heading">
+                <div class="small-title">What I have worked on</div>
+                <h2 class="section-title">
+                    My <span>Projects</span>
+                </h2>
+                <p class="section-description">
+                    Here are example projects you can replace
+                    with your own work.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <article class="project-card">
+                    <div class="project-image one">🌐</div>
+
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+
+                        <p>
+                            A personal website that introduces me,
+                            displays my skills, and presents my work.
+                        </p>
+
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image two">🍽️</div>
+
+                    <div class="project-content">
+                        <h3>Restaurant Website</h3>
+
+                        <p>
+                            A website concept for showing a restaurant
+                            menu, prices, and business information.
+                        </p>
+
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image three">📊</div>
+
+                    <div class="project-content">
+                        <h3>Business Dashboard</h3>
+
+                        <p>
+                            A design concept for organising business
+                            information and displaying important figures.
+                        </p>
+
+                        <span class="tag">Web Design</span>
+                        <span class="tag">CSS</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="section contact-section" id="contact">
+            <div class="container contact-grid">
+
+                <div>
+                    <div class="small-title">Get in touch</div>
+
+                    <h2 class="section-title">
+                        Let's Work <span>Together</span>
+                    </h2>
+
+                    <p class="contact-text">
+                        Do you have a project, an opportunity,
+                        or a question? Feel free to contact me.
+                        I would be happy to hear from you.
+                    </p>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Contact Information</h3>
+
+                    <p>
+                        Email:
+                        <a href="mailto:you@example.com">
+                            you@example.com
+                        </a>
+                    </p>
+
+                    <p>Location: Kigali, Rwanda</p>
+
+                    <p>
+                        Replace the example email address with
+                        your real email address.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <a href="#home" class="logo">
+                Your<span>Name.</span>
+            </a>
+
+            <p>
+                © 2026 Your Name. Built with HTML and CSS.
+            </p>
+
+            <a href="#home">Back to top ↑</a>
+        </div>
+    </footer>
+
+</body>
+</html>
